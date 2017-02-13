@@ -54,12 +54,12 @@ NLDatalog.semantics = NLDatalog.grammar.createSemantics().addOperation('toAST', 
     let name = '';
     const args = [];
     parts.children.forEach((part, idx) => {
-      if (part.isToken('word')) {
+      if (part.isA('word')) {
         if (idx > 0 && part.sourceString[0] !== "'") {
           name = name + ' ';
         }
         name = name + part.sourceString;
-      } else if (part.isToken('not')) {
+      } else if (part.isA('not')) {
         negated = !negated;
       } else {
         if (idx > 0) {
@@ -97,7 +97,7 @@ NLDatalog.semantics = NLDatalog.grammar.createSemantics().addOperation('toAST', 
     return [x.toAST()].concat(xs.toAST());
   }
 
-}).addOperation('isToken(type)', {
+}).addOperation('isA(type)', {
   _nonterminal(children) {
     return this.ctorName === this.args.type;
   }
